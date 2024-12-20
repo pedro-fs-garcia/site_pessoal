@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='css/tailwind.css') }}"> -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+
+    <link rel="stylesheet" type='text/css' href="https://cdn.jsdelivr.net/gh/devicons/devicon@latest/devicon.min.css" />
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <title>Pedro Garcia</title>
+</head>
+
+<body class="bg-gray-100 text-gray-900" style="font-family: 'Montserrat', Arial, Helvetica, sans-serif;">
+    <nav class="bg-gray-800 text-white fixed top-0 left-0 w-full z-50">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+            <div class="flex items-center justify-between h-12">
+                <!-- Logotipo -->
+                <div class="flex items-center">
+                    <a href="#" class="text-xl font-bold text-white">
+                        Pedro Garcia
+                    </a>
+                </div>
+
+                <!-- Links da Navbar -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-4">
+                        <a href="/home#home"
+                            class="text-gray-300 hover:text-white hover:underline px-3 py-2 rounded-md text-sm font-medium">Home</a>
+                        <a href="/home#about"
+                            class="text-gray-300 hover:text-white hover:underline px-3 py-2 rounded-md text-sm font-medium">About</a>
+                        <a href="/home#services"
+                            class="text-gray-300 hover:text-white hover:underline px-3 py-2 rounded-md text-sm font-medium">Services</a>
+                        <a href="/work"
+                            class="text-gray-300 hover:text-white hover:underline px-3 py-2 rounded-md text-sm font-medium">Work</a>
+                        <a href="/schedule"
+                            class="text-gray-300 hover:text-white hover:underline px-3 py-2 rounded-md text-sm font-medium">Request
+                            meeting</a>
+                        <a href="/blogfeed"
+                            class="text-gray-300 hover:text-white hover:underline px-3 py-2 rounded-md text-sm font-medium">Blog
+                            Feed</a>
+                        <a href="/pgp"
+                            class="text-gray-300 hover:text-white hover:underline px-3 py-2 rounded-md text-sm font-medium">PGP</a>
+                        <a href="/home#contact"><button
+                                class="text-lg font-large hover:bg-gray-200 hover:text-black font-bold py-2 px-4 border hover:border-transparent">
+                                Contact
+                            </button></a>
+                    </div>
+                </div>
+
+                <!-- Botão de Menu para Mobile -->
+                <div class="flex md:hidden">
+                    <button type="button"
+                        class="inline-flex items-center justify-center p-2 rounded-md text-gray-400 hover:text-white hover:bg-gray-700 focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800"
+                        aria-controls="mobile-menu" aria-expanded="false" id="menu-button">
+                        <span class="sr-only">Abrir Menu</span>
+                        <!-- Ícone Hamburger -->
+                        <svg class="h-6 w-6" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M4 6h16M4 12h16m-7 6h7" />
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Menu Mobile -->
+        <div class="hidden px-6 h-screen" id="mobile-menu">
+            <div class="space-y-1 px-4 pt-2 pb-3 sm:px-3">
+                <a href="/home"
+                    class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium menu-link">Home</a>
+                <hr>
+                <a href="/home#about"
+                    class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium menu-link">About</a>
+                <hr>
+                <a href="/home#services"
+                    class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium menu-link">Services</a>
+                <hr>
+                <a href="/work"
+                    class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium menu-link">Work</a>
+                <hr>
+                <a href="/schedule"
+                    class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium menu-link">Request
+                    meeting</a>
+                <hr>
+                <a href="/blogfeed"
+                    class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium menu-link">Blog
+                    Feed</a>
+                <hr>
+                <a href="/pgp"
+                    class="text-gray-300 hover:text-white block px-3 py-2 rounded-md text-base font-medium menu-link">PGP</a>
+                <br>
+                <a href="/home#contact"><button
+                        class="text-lg font-large w-full hover:bg-gray-200 hover:text-black font-bold py-2 px-4 border">
+                        Contact
+                    </button></a>
+            </div>
+        </div>
+    </nav>
+    <main class="">
+        {% block content %}{% endblock %}
+    </main>
+    <footer class="bg-gray-800 text-white py-8 px-16">
+        <div class="container mx-auto grid grid-cols-1 md:grid-cols-2 gap-4">
+            <!-- Primeira Coluna -->
+            <div>
+                <h2 class="text-lg font-semibold mb-4">Contact Information</h2>
+                <ul class="text-gray-300 space-y-2">
+                    <li>Email: {{global_data["email"]}}</li>
+                    <li>Phone: {{global_data["phone"]}} </li>
+                    <li>Address: {{global_data["address"]}} </li>
+                    <li>
+                        <a href="/schedule"><button
+                                class="text-lg font-large hover:bg-gray-200 hover:text-black font-bold py-2 px-4 border hover:border-transparent">
+                                Schedule appointment
+                            </button></a>
+                    </li>
+                </ul>
+
+            </div>
+
+            <!-- Segunda Coluna -->
+            <div>
+                <h2 class="text-lg font-semibold mb-4">Find Us</h2>
+                <p class="text-gray-300">
+                    We are a company dedicated to delivering the best services to our customers. Contact us for more
+                    information or inquiries.
+                </p>
+                <br>
+                <ul style="display: flex; justify-content: center; flex-wrap: wrap; gap: 10px;">
+                    <li>
+                        <a class="hover:text-blue-600 transition-all" href="{{global_data['github']}}" target="">
+                            GitHub
+                        </a>
+                    </li>
+                    <li>
+                        <a class="hover:text-blue-600 transition-all px-6" href="{{global_data['linkedin']}}" target="">
+                            LinkedIn
+                        </a>
+                    </li>
+                    <li>
+                        <a class="hover:text-blue-600 transition-all px-6" href="{{global_data['instagram']}}"
+                            target="">
+                            Instagram
+                        </a>
+                    </li>
+                    <li>
+                        <a class="hover:text-blue-600 transition-all px-6" href="#" target="">
+                            link
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div class="container mx-auto text-center text-gray-400 py-8">
+            <p>&copy; 2024 Pedro Garcia. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+</body>
+{% block script %}{% endblock %}
+<script>
+    const menuButton = document.getElementById('menu-button');
+    const mobileMenu = document.getElementById('mobile-menu');
+    const menuLinks = document.querySelectorAll('.menu-link'); // Seleciona todos os links no menu
+
+    // Abrir/Fechar menu ao clicar no botão
+    menuButton.addEventListener('click', () => {
+        mobileMenu.classList.toggle('hidden');
+    });
+
+    // Fechar o menu ao clicar em um link
+    menuLinks.forEach(link => {
+        link.addEventListener('click', () => {
+            mobileMenu.classList.add('hidden');
+        });
+    });
+</script>
+
+</html>

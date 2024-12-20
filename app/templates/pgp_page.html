@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4">
+    <div class="flex flex-wrap py-36 items-center justify-center">
+        <div class="w-full lg:w-1/2">
+            <h2 class="text-3xl font-bold mb-4">PGP key</h2>
+            <p class="text-gray-600 mb-6">Send private messages and verify authenticity</p>
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <p>Fingerprint:</p>
+                <p>{{global_data["pgp_fingerprint"]}}</p>
+            </div>
+            <br>
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <p id="pgp-key" class="break-words">
+                    {{ global_data["pgp_public_key"] }}
+                </p>
+                <button id="copy-button" class="mt-4 text-black py-2 px-4 rounded-lg">
+                    Copy to Clipboard
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}
+
+{% block script %}
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+        const copyButton = document.getElementById('copy-button');
+        const pgpKeyElement = document.getElementById('pgp-key');
+
+        copyButton.addEventListener('click', () => {
+            const textToCopy = pgpKeyElement.textContent;
+
+            navigator.clipboard.writeText(textToCopy)
+                .then(() => {
+                    alert('Copied to clipboard!');
+                })
+                .catch(err => {
+                    console.error('Failed to copy text: ', err);
+                    alert('Failed to copy text.');
+                });
+        });
+    });
+</script>
+{% endblock %}
