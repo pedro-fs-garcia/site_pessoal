@@ -1,0 +1,30 @@
+[
+    {
+        "id": 1,
+        "name":"Mestre Ágil",
+        "github": "https://github.com/Titus-System/1Semestre-ADS",
+        "image":"https://github.com/Titus-System/1Semestre-ADS/raw/5aaa1b580cbe7d8a66140fdc0de0b304689fa11f/docs/images/logo.png",
+        "description":"Mestre Ágil is an interactive and engaging educational platform designed to simplify learning and implementing the SCRUM methodology. The platform is deeply rooted in the values and pillars of SCRUM, focusing on delivering high-quality content to users while integrating standardized tools and effective assessment methods. The project is an academic project developed in the first semester of college It is the result of a semester worth of learning and work."
+    },
+    {
+        "id": 2,
+        "name":"IdScan",
+        "github": "https://github.com/Titus-System/2semestre-ADS",
+        "image":"https://raw.githubusercontent.com/Titus-System/2semestre-ADS/refs/heads/main/docs/logosemfundo_IDScan.png",
+        "description":"IdScan is an application for processing identity document images (Brazilian ID cards) using a local AI, without relying on external APIs, storing the extracted data in a local MySQL database. It is designed to streamline the digitization, extraction, and organization of information from physical documents, making data management more efficient.\n\nIdScan is an academic project developed during the second semester of college. It's goal was to develop a Java Desktop application that leverages Artificial Intelligence models to extract information from identity documents (IDs) and subsequently store and edit the data in a relational database (MySQL). All application operations, from AI-based processing to database interactions, are performed locally, ensuring data privacy and independence."
+    },
+    {
+        "id": 3,
+        "name":"Matagal",
+        "github": "",
+        "image":"",
+        "description":""
+    },
+    {
+        "id": 4,
+        "name":"FilmMash",
+        "github": "https://github.com/pedro-fs-garcia/filmmash-android",
+        "image":"https://raw.githubusercontent.com/pedro-fs-garcia/filmmash-android/refs/heads/Main/app/src/main/res/drawable-nodpi/leonardo_phoenix_design_a_minimalist_modern_logo_for_a_mobile_2.jpg",
+        "description":"Filmmash is a movie ranking app that uses the Elo rating system to rank movies based on user choices."
+    }
+]

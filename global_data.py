@@ -6,6 +6,8 @@ global_data = {
     "github": "https://github.com/pedro-fs-garcia",
     "linkedin": "https://www.linkedin.com/in/pedro-fs-garcia",
     "instagram": "#",
+    "success_form_submission": "Your request was successfully received. Please wait for our contact in your provided email.",
+    "fail_form_submission": "Unfortunately, we could not receive your request.\nPlease try again later.",
     "pgp_fingerprint":"5DCE 27C7 EA71 BA8F CA1D 4E9B 2A0F 1FF6 B858 7489",
     "pgp_public_key":"""-----BEGIN PGP PUBLIC KEY BLOCK-----
                         mQENBGZciU4BCADTMkg+AUyWb7uJFrX4yG73U1pBGiStBTHElFLpwLoUr/lk0Ohz

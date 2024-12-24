@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto px-4 h-screen">
+    <section class="flex flex-wrap py-36 items-center justify-center">
+        <div class="w-full lg:w-1/2">
+            <h2 class="text-3xl font-bold mb-4">Thank you for your contact!</h2>
+            {% if result == True %}
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <p class="text-gray-600 mb-6">{{global_data["success_form_submission"]}}</p>
+            </div>
+            {% else %}
+            <div class="bg-white shadow-md rounded-lg p-6">
+                <p class="text-gray-600 mb-6">{{global_data["fail_form_submission"]}}</p>
+            </div>
+            {% endif %}
+            <br>
+        </div>
+    </section>
+</div>
+{% endblock %}

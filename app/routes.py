@@ -1,13 +1,15 @@
-from flask import Blueprint, render_template, request, jsonify
+from flask import Blueprint, render_template, request
 from marshmallow import ValidationError
 from app.utils.logging_config import app_logger, error_logger
 from .schemas.get_in_touch_form_schema import GetInTouchFormSchema
 from .schemas.request_meeting_form_schema import RequestMeetingFormSchema
 from global_data import global_data
-
+import json
 
 main = Blueprint('main', __name__)
 
+with open("app/static/projects.json", "r", encoding = "utf-8") as file:
+    projects = json.load(file)
 
 @main.route('/')
 @main.route("/home")
@@ -27,7 +29,8 @@ def pgp_page():
 
 @main.route("/work")
 def work():
-    return render_template("work.html", global_data = global_data)
+    print(projects)
+    return render_template("work.html", global_data = global_data, projects=projects)
 
 
 @main.route("/services/<name>")
@@ -35,7 +38,13 @@ def services(name):
     return render_template(f"{name}.html", global_data=global_data)
 
 
-@main.route("/get_in_touch", methods = ["POST"])
+@main.route("/submission_result/<result>")
+def thank_you(result):
+    result = True if result == "success" else False
+    return render_template("submission_result.html", global_data = global_data, result = result)
+
+
+@main.route("/get_in_touch", methods = ["POST", "GET"])
 def get_in_touch():
     input_data = request.form.to_dict()
 
@@ -49,15 +58,15 @@ def get_in_touch():
         app_logger.info("Object created:", new_get_in_touch_form)
 
         if new_get_in_touch_form.save_new_to_database():
-            return ("Your request was saved. Please wait for our contact in you provided email.")
+            return thank_you('success')
     
     except ValidationError as e:
         error_logger.error("Validation error:", e.messages)
 
-    return ("Something went wrong. Please try again later.")
+    return thank_you('fail')
 
 
-@main.route("/request_meeting", methods = ["POST"])
+@main.route("/request_meeting", methods = ["POST", "GET"])
 def request_meeting():
     input_data = request.form.to_dict()
 
@@ -69,10 +78,10 @@ def request_meeting():
         app_logger.info("Object created: ", new_request_meeting)
 
         if new_request_meeting.save_new_to_database():
-            return ("Your request was saved. Please wait for our contact in you provided email.")
+            return thank_you('success')
 
     except ValidationError as e:
         error_logger.error("Validation error: ", e.messages)
 
-    return ("Something went wrong. Please try again later.")
+    return thank_you('fail')
 
