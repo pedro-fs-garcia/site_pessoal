@@ -33,6 +33,11 @@ def work():
     return render_template("work.html", global_data = global_data, projects=projects)
 
 
+@main.route("/blogfeed")
+def blogfeed():
+    return "This page is not available yet. Please come back in the future."
+
+
 @main.route("/services/<name>")
 def services(name):
     return render_template(f"{name}.html", global_data=global_data)
