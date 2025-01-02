@@ -11,10 +11,13 @@ main = Blueprint('main', __name__)
 with open("app/static/projects.json", "r", encoding = "utf-8") as file:
     projects = json.load(file)
 
+with open("app/static/testimonials.json", "r", encoding="utf-8") as file:
+    testimonials = json.load(file)
+
 @main.route('/')
 @main.route("/home")
 def home():
-    return render_template('index.html', global_data = global_data)
+    return render_template('index.html', global_data = global_data, testimonials = testimonials)
 
 
 @main.route('/schedule')

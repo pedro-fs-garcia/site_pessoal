@@ -26,4 +26,10 @@ create_tables_script = """
                     hear_about_us VARCHAR(50),
                     submission_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP
                 );
+                CREATE TABLE IF NOT EXISTS clients_testimonials (
+                    testimonial_id SERIAL PRIMARY KEY,
+                    name VARCHAR(100),
+                    reference VARCHAR(100),
+                    testimony VARCHAR(500)
+                );
             """

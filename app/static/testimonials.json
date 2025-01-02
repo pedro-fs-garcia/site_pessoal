@@ -1,0 +1,17 @@
+[
+    {
+        "name":"John Doe",
+        "reference":"CEO, Tech Innovators",
+        "testimony":"\"Pedro is simply amazing! The website he built for my business exceeded all my expectations. He is highly skilled and incredibly professional.\""
+    },
+    {
+        "name":"Sarah Lee",
+        "reference":"Product Manager, AppCorp",
+        "testimony":"\"Pedro delivered an exceptional mobile app for our team. His attention to detail and dedication to quality are unmatched. Highly recommended!\""
+    },
+    {
+        "name":"Emily Smith",
+        "reference":"Freelancer",
+        "testimony":"\"Working with Pedro was a pleasure. His expertise in web and mobile development is outstanding, and he delivered beyond expectations.\""
+    }
+]
