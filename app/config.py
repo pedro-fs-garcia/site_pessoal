@@ -8,3 +8,5 @@ DB_PASSWORD = os.getenv("DB_PASSWORD", "default_password")
 DB_HOST = os.getenv("DB_HOST", "localhost")
 DB_NAME = os.getenv("DB_NAME", "default_db")
 DB_PORT = os.getenv("DB_PORT", "5432")
+
+ADMIN_TOKEN = os.getenv("ADMIN_TOKEN")

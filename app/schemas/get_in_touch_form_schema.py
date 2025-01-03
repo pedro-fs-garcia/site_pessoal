@@ -7,6 +7,7 @@ class GetInTouchFormSchema(Schema):
     phone = fields.Str(allow_none=True, missing="")
     message = fields.Str(required=True)
     form_id = fields.Int(missing=-1)
+    submission_date = fields.DateTime(missing = None)
 
     @post_load
     def make_object(self, data, **kwargs):

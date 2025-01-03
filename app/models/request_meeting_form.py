@@ -13,14 +13,15 @@ class RequestMeetingForm:
             message,
             web_development,
             mobile_development,
-            API_development,
+            api_development,
             database_management,
             cloud_services,
             consultation,
             project_timeline,
             budget_range,
             hear_about_us,
-            form_id=-1
+            form_id=-1,
+            submission_date = None
 
     ):
         self.date = date
@@ -31,7 +32,7 @@ class RequestMeetingForm:
         self.message = message
         self.web_development = web_development
         self.mobile_development = mobile_development
-        self.API_development = API_development
+        self.api_development = api_development
         self.database_management = database_management
         self.cloud_services = cloud_services
         self.consultation = consultation
@@ -39,6 +40,7 @@ class RequestMeetingForm:
         self.budget_range = budget_range
         self.hear_about_us = hear_about_us
         self.form_id = form_id
+        self.submission_date = submission_date
 
     def __repr__(self):
         return f"<RequestMeetingForm(date={self.date}, time={self.time})>"
@@ -49,8 +51,8 @@ class RequestMeetingForm:
             conn = get_connection()
             app_logger.info("Opened connection to database")
             with conn.cursor() as cur:
-                query = "INSERT INTO request_meeting_form (date, time, name, email, phone, message, web_development, API_development, database_management, cloud_services, consultation, project_timeline, budget_range, hear_about_us) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
-                values = (self.date, self.time, self.name, self.email, self.phone, self.message, (self.web_development=="on"), (self.mobile_development=="on"), self.database_management=="on", self.cloud_services=="on", self.consultation=="on", self.project_timeline, self.budget_range, self.hear_about_us)
+                query = "INSERT INTO request_meeting_form (date, time, name, email, phone, message, web_development, mobile_development, API_development, database_management, cloud_services, consultation, project_timeline, budget_range, hear_about_us) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)"
+                values = (self.date, self.time, self.name, self.email, self.phone, self.message, (self.web_development=="on"), (self.mobile_development=="on"), self.api_development=="on", self.database_management=="on", self.cloud_services=="on", self.consultation=="on", self.project_timeline, self.budget_range, self.hear_about_us)
                 cur.execute(query, values)
                 app_logger.info("new 'request meeting' form was added to the database.")
             conn.commit()

@@ -10,7 +10,7 @@ class RequestMeetingFormSchema(Schema):
     message = fields.Str(required=True)
     web_development = fields.Str(allow_none = True, missing = None)
     mobile_development = fields.Str(allow_none = True, missing = None)
-    API_development = fields.Str(allow_none = True, missing = None)
+    api_development = fields.Str(allow_none = True, missing = None)
     database_management = fields.Str(allow_none = True, missing = None)
     cloud_services = fields.Str(allow_none = True, missing = None)
     consultation = fields.Str(allow_none = True, missing = None)
@@ -18,6 +18,7 @@ class RequestMeetingFormSchema(Schema):
     budget_range = fields.Str(allow_none = True, missing = None)
     hear_about_us = fields.Str(allow_none = True, missing = None)
     form_id = fields.Int(missing = -1)
+    submission_date = fields.DateTime(missing = None)
 
     @post_load
     def make_object(self, data, **kwargs):

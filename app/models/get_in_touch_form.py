@@ -5,17 +5,19 @@ from app.utils.logging_config import app_logger, error_logger
 class GetInTouchForm:
     def __init__(
             self,
-            name,
-            email,
-            phone,
-            message,
-            form_id = -1
+            form_id = -1,
+            name = None,
+            email = None,
+            phone = None,
+            message = None,
+            submission_date = None
     ):
         self.name = name
         self.email = email
         self.phone = phone
         self.message = message
         self.form_id = form_id
+        self.submission_date = submission_date
     
     def __repr__(self):
         return f"<GetInTouchForm(name={self.name}, email={self.email}, phone={self.phone}, message={self.message}, form_id={self.form_id})>"
@@ -23,6 +25,7 @@ class GetInTouchForm:
 
     def save_new_to_database(self):
         operation_success = False
+        conn = None
         try:
             conn = get_connection()
             app_logger.info("Opened connection to database")
