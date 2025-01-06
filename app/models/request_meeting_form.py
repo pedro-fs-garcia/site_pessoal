@@ -64,3 +64,50 @@ class RequestMeetingForm:
                 conn.close()
         return operation_success
     
+
+    def update_form_to_database(self):
+        conn = None
+        operation_success = False
+        try:
+            conn = get_connection()
+            app_logger.info("Opened connection to database")
+            with conn.cursor() as cur:
+                query = """
+                    UPDATE request_meeting_form 
+                    SET date = %s, time = %s, name = %s, email = %s, phone = %s, message = %s, web_development = %s, mobile_development = %s, API_development = %s, database_management = %s, cloud_services = %s, consultation = %s, project_timeline = %s, budget_range = %s, hear_about_us = %s
+                    WHERE form_id = %s
+                    """
+                values = (self.date, self.time, self.name, self.email, self.phone, self.message, self.web_development=='on', self.mobile_development=='on', self.api_development=='on', self.database_management=='on', self.cloud_services=='on', self.consultation=='on', self.project_timeline, self.budget_range, self.hear_about_us, self.form_id)
+                cur.execute(query, values)
+                app_logger.info(f"'request meeting' form number {self.form_id} was updated.")
+            conn.commit()
+            operation_success = True
+            cur.close()
+        except OperationalError as e:
+            error_logger.error(f"Something went wrong when trying to update 'request meeting' form number {self.form_id} to database: {e}")
+        finally:
+            if conn:
+                conn.close()
+        return operation_success
+
+
+    def delete_from_database(self):
+        conn = None
+        operation_success = False
+        try:
+            conn = get_connection()
+            app_logger.info("Opened connection to database")
+            with conn.cursor() as cur:
+                query = f"DELETE FROM request_meeting_form WHERE form_id = {self.form_id}"
+                # values = (self.form_id)
+                cur.execute(query)
+                app_logger.info(f"'request meeting' form number {self.form_id} was deleted from database.")
+            conn.commit()
+            operation_success = True
+            cur.close()
+        except OperationalError as e:
+            error_logger.error(f"Something went wrong when trying to delete 'request meeting' form number {self.form_id} from database: {e}")
+        finally:
+            if conn:
+                conn.close()
+        return operation_success

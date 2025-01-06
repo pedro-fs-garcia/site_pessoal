@@ -1,6 +1,222 @@
 {% extends 'base.html' %}
 
 {% block content %}
+<section class="pt-16 sm:w-4/5 w-full items-center mx-auto">
+    <div class="w-full mx-auto pt-4">
+        <h1 class="text-2xl font-bold mb-6 text-center">ADMIN PAGE</h1>
+    </div>
+
+    <div class="overflow-x-auto px-4 pb-6">
+        <h2 class="text-2xl font-bold mb-6">Getting in Touch</h2>
+        <div class="space-y-4" data-accordion="collapse">
+            {% for row in get_in_touch_forms %}
+            <div class="border border-gray-200 rounded-lg shadow-md">
+                <div class="flex justify-between items-center px-6 py-4 bg-gray-100 cursor-pointer"
+                    data-collapse-target="details-{{ loop.index }}">
+                    <div>
+                        <h3 class="text-lg font-semibold">{{row.form_id}} - {{ row.name }}</h3>
+                        <p class="text-sm text-gray-600">{{ row.submission_date }}</p>
+                    </div>
+                </div>
+                <div id="details-{{ loop.index }}" class="hidden px-6 py-4 bg-gray-50">
+                    <form method="POST" action="/update_get_in_touch_form">
+                        <input type="hidden" name="form_id" value="{{ row.form_id }}">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label class="block font-medium text-sm md:text-base">Name</label>
+                                <input type="text" name="name" value="{{ row.name }}"
+                                    class="w-full border border-gray-300 rounded p-3 text-sm md:text-base">
+                            </div>
+                            <div>
+                                <label class="block font-medium text-sm md:text-base">Email</label>
+                                <input type="email" name="email" value="{{ row.email }}"
+                                    class="w-full border border-gray-300 rounded p-3 text-sm md:text-base">
+                            </div>
+                            <div>
+                                <label class="block font-medium text-sm md:text-base">Phone</label>
+                                <input type="text" name="phone" value="{{ row.phone }}"
+                                    class="w-full border border-gray-300 rounded p-3 text-sm md:text-base">
+                            </div>
+                            <div class="col-span-1 sm:col-span-2">
+                                <label class="block font-medium text-sm md:text-base">Message</label>
+                                <textarea name="message"
+                                    class="w-full border border-gray-300 rounded p-3 text-sm md:text-base resize-none"
+                                    rows="3">{{ row.message }}</textarea>
+                            </div>
+                            <div class="flex flex-col sm:flex-row gap-4 col-span-1 sm:col-span-2 mt-4">
+                                <button type="submit" name="action" value="save"
+                                    class="w-full sm:w-auto bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 text-sm md:text-base">
+                                    Save
+                                </button>
+                                <button type="submit" name="action" value="delete"
+                                    class="w-full sm:w-auto bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 text-sm md:text-base">
+                                    Delete
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="overflow-x-auto px-4 py-6">
+        <h2 class="text-2xl font-bold mb-6">Meeting requests</h2>
+        <div class="space-y-4" data-accordion="collapse">
+            {% for row in request_meeting_forms %}
+            <div class="border border-gray-200 rounded-lg shadow-md">
+                <div class="flex justify-between items-center px-6 py-4 bg-gray-100 cursor-pointer"
+                    data-collapse-target="meeting-details-{{ loop.index }}">
+                    <div>
+                        <h3 class="text-lg font-semibold">{{row.form_id}} - {{ row.name }}</h3>
+                        <p class="text-sm text-gray-600">{{ row.submission_date }}</p>
+                    </div>
+                </div>
+                <div id="meeting-details-{{ loop.index }}" class="hidden px-6 py-4 bg-gray-50">
+                    <form method="POST" action="/update_request_meeting_form">
+                        <input type="hidden" name="form_id" value="{{ row.form_id }}">
+                        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                            <div>
+                                <label for="date" class="block font-medium text-sm md:text-base">Date</label>
+                                <input type="date" id="date" name="date" value="{{ row.date }}" required
+                                       class="w-full mt-2 border border-gray-300 rounded-lg p-3 text-sm md:text-base">
+                            </div>
+                            <div>
+                                <label for="time" class="block font-medium text-sm md:text-base">Time</label>
+                                <input type="time" id="time" name="time" value="{{ row.time }}" required
+                                       class="w-full mt-2 border border-gray-300 rounded-lg p-3 text-sm md:text-base">
+                            </div>
+                            <div>
+                                <label class="block font-medium text-sm md:text-base">Name</label>
+                                <input type="text" name="name" value="{{ row.name }}"
+                                    class="w-full border border-gray-300 rounded p-3 text-sm md:text-base">
+                            </div>
+                            <div>
+                                <label class="block font-medium text-sm md:text-base">Email</label>
+                                <input type="email" name="email" value="{{ row.email }}"
+                                    class="w-full border border-gray-300 rounded p-3 text-sm md:text-base">
+                            </div>
+                            <div>
+                                <label class="block font-medium text-sm md:text-base">Phone</label>
+                                <input type="text" name="phone" value="{{ row.phone }}"
+                                    class="w-full border border-gray-300 rounded p-3 text-sm md:text-base">
+                            </div>
+                            <div>
+                                <label class="block font-medium text-sm md:text-base">Budget range</label>
+                                <input type="text" name="budget_range" value="{{ row.budget_range }}"
+                                    class="w-full border border-gray-300 rounded p-3 text-sm md:text-base">
+                            </div>
+                            <div>
+                                <label class="block font-medium text-sm md:text-base">Project Timeline</label>
+                                <input type="text" name="project_timeline" value="{{ row.project_timeline }}"
+                                    class="w-full border border-gray-300 rounded p-3 text-sm md:text-base">
+                            </div>
+                            <div>
+                                <label class="block font-medium text-sm md:text-base">Hear about us</label>
+                                <input type="text" name="hear_about_us" value="{{ row.hear_about_us }}"
+                                    class="w-full border border-gray-300 rounded p-3 text-sm md:text-base">
+                            </div>
+                        </div>
+
+                        <div class="flex-wrap py-4">
+                            <label class="block font-medium">Services of interest</label>
+                            <div class="flex items-center">
+                                <input id="web_development" name="web_development" type="checkbox" {% if
+                                    row.web_development %} checked {% endif %}
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="web_development" class="ms-2 text-sm font-medium">Web development</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="mobile_development" name="mobile_development" type="checkbox" {% if
+                                    row.mobile_development %} checked {% endif %}
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="checked-checkbox" class="ms-2 text-sm font-medium">Mobile
+                                    development</label>
+                            </div>
+
+                            <div class="flex items-center">
+                                <input id="api_development" name="api_development" type="checkbox" {% if
+                                    row.api_development %} checked {% endif %}
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="api_development" class="ms-2 text-sm font-medium">API
+                                    development</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="database_management" name="database_management" type="checkbox" {% if
+                                    row.database_management %} checked {% endif %}
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="database_management" class="ms-2 text-sm font-medium">Database
+                                    management</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="cloud_services" name="cloud_services" type="checkbox" {% if
+                                    row.cloud_services %} checked {% endif %}
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="clou_services" class="ms-2 text-sm font-medium">Cloud
+                                    services</label>
+                            </div>
+                            <div class="flex items-center">
+                                <input id="consultation" name="consultation" type="checkbox" {% if row.consultation %}
+                                    checked {% endif %}
+                                    class="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600">
+                                <label for="consultation" class="ms-2 text-sm font-medium">Consultation</label>
+                            </div>
+                        </div>
+
+                        <div class="col-span-2">
+                            <label class="block font-medium">Message</label>
+                            <textarea name="message"
+                                class="w-full border border-gray-300 rounded p-3 text-sm resize-none">{{ row.message }}</textarea>
+                        </div>
+
+                        <div class="flex flex-col sm:flex-row gap-4 col-span-1 sm:col-span-2 mt-4">
+                            <button type="submit" name="action" value="save"
+                                class="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 text-sm">
+                                Save
+                            </button>
+                            <button type="submit" name="action" value="delete"
+                                class="bg-red-500 text-white px-6 py-2 rounded-lg hover:bg-red-600 text-sm">
+                                Delete
+                            </button>
+                        </div>
+
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+</section>
+
+{% endblock %}
+
+{% block script %}
+<script>
+    document.querySelectorAll("[data-collapse-target]").forEach(button => {
+        button.addEventListener("click", () => {
+            const targetId = button.getAttribute("data-collapse-target");
+            const target = document.getElementById(targetId);
+
+            if (target.classList.contains("hidden")) {
+                // Fecha qualquer outro accordion aberto
+                document.querySelectorAll("[id^='details-']").forEach(content => {
+                    if (content !== target) {
+                        content.classList.add("hidden");
+                    }
+                });
+
+                // Expande o item atual
+                target.classList.remove("hidden");
+            } else {
+                // Recolhe o item atual
+                target.classList.add("hidden");
+            }
+        });
+    });
+</script>
 
 
 {% endblock %}

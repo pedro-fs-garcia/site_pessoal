@@ -2,8 +2,8 @@ from marshmallow import Schema, fields, post_load
 from app.models.request_meeting_form import RequestMeetingForm
 
 class RequestMeetingFormSchema(Schema):
-    date = fields.Str(allow_none=True, missing = "")
-    time = fields.Str(allow_none=True, missing = "")
+    date = fields.Str(allow_none=True, missing = None)
+    time = fields.Str(allow_none=True, missing = None)
     name = fields.Str(required = True)
     email = fields.Email(required=True)
     phone = fields.Str(allow_none=True, missing="")

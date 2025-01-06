@@ -42,3 +42,50 @@ class GetInTouchForm:
             if conn:
                 conn.close()
         return operation_success
+
+
+    def update_form_to_database(self):
+        conn = None
+        operation_success = False
+        try:
+            conn = get_connection()
+            app_logger.info("Opened connection to database")
+            with conn.cursor() as cur:
+                query = """
+                    UPDATE get_in_touch_form 
+                    SET name = %s, email = %s, phone = %s, message = %s
+                    WHERE form_id = %s
+                    """
+                values = (self.name, self.email, self.phone, self.message, self.form_id)
+                cur.execute(query, values)
+                app_logger.info(f"'get in touch' form number {self.form_id} was updated.")
+            conn.commit()
+            operation_success = True
+            cur.close()
+        except OperationalError as e:
+            error_logger.error(f"Something went wrong when trying to update 'get in touch' form number {self.form_id} to database: {e}")
+        finally:
+            if conn:
+                conn.close()
+        return operation_success
+    
+    def delete_form_from_database(self):
+        conn = None
+        operation_success = False
+        try:
+            conn = get_connection()
+            app_logger.info("Opened connection to database")
+            with conn.cursor() as cur:
+                query = "DELETE FROM get_in_touch_form WHERE form_id = %s"
+                values = (self.form_id)
+                cur.execute(query, values)
+                app_logger.info(f"'get in touch' form number {self.form_id} was deleted from database.")
+            conn.commit()
+            operation_success = True
+            cur.close()
+        except OperationalError as e:
+            error_logger.error(f"Something went wrong when trying to delete 'get in touch' form number {self.form_id} from database: {e}")
+        finally:
+            if conn:
+                conn.close()
+        return operation_success

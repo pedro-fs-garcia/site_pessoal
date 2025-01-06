@@ -1,9 +1,10 @@
 from flask import Blueprint, render_template, request, redirect
+from flask_login import logout_user
 from marshmallow import ValidationError
 from app.utils.logging_config import app_logger, error_logger
-from .schemas.get_in_touch_form_schema import GetInTouchFormSchema
-from .database import forms
-from .schemas.request_meeting_form_schema import RequestMeetingFormSchema
+from app.schemas.get_in_touch_form_schema import GetInTouchFormSchema
+from app.database import forms
+from app.schemas.request_meeting_form_schema import RequestMeetingFormSchema
 from global_data import global_data
 import json
 
@@ -14,24 +15,6 @@ with open("app/static/projects.json", "r", encoding = "utf-8") as file:
 
 with open("app/static/testimonials.json", "r", encoding="utf-8") as file:
     testimonials = json.load(file)
-
-
-@main.route("/admin", methods=["GET", "POST"])
-def admin():
-    if request.method == "POST":
-        input_data = request.form.to_dict()
-        from .config import ADMIN_TOKEN
-        if input_data["access_token"] == ADMIN_TOKEN:
-            app_logger.info("Granted admin access.")
-            get_in_touch_forms = forms.fetch_all_get_in_touch_forms()
-            request_meeting_forms = forms.fetch_all_request_meeting_forms()
-            print(request_meeting_forms)
-            return render_template("admin/admin_page.html", global_data = global_data, access_token = True)
-
-        error_logger.error("Denied admin access.")
-        return redirect("/home")
-
-    return render_template("admin/access_page.html", global_data = global_data)
 
 
 @main.route('/')
